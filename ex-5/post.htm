@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>form post</title>
+    <h2>EMPLOYEE DETAILS</h2>
+    <style>
+
+    </style>
+</head>
+<body bgcolor="aqua">
+    <form action="http://localhost:8000/login" method="post">
+        <table>
+            <tr>
+        <th>EMPLOYEE NAME :</th><td><input type="text" name="username" value=""/></td>
+        </tr>
+        <tr>
+        <th>EMPLOYEE ID :</th><td><input type="text" name="id" value=""/></td>
+        </tr>
+        <tr>
+        <th>BRANCH :</th><td><input type="text" name="branch" value=""/></td>
+        </tr>
+        <tr>
+        <th><label for="gender">GENDER</label></th>
+        <td>FEMALE <input type="radio" name="gender" value="female"/>
+        MALE<input type="radio" name="gender" value="male"/></td>
+    </tr>
+    <tr>
+        <th>MOBILE NO :</th><td><input type="text" name="phno" value=""/></td>
+    </tr>
+    <tr>
+        <th>BRANCH ADDRESS :</th><td><input type="text" name="branchadd" value=""/></td>
+    </tr>
+    <tr>
+        <td>
+        <input type="submit" name="login" value="login"/>
+    </td>
+    </tr>
+</table>
+    </form>
+</body>
+</html>

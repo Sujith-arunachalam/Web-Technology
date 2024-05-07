@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+        width: 100%;
+    }
+
+    td {
+        padding: 8px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    .error {
+        color: red;
+    }
+
+    button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button[type="reset"] {
+        background-color: #dc3545;
+    }
+
+    button[type="submit"]:hover, button[type="reset"]:hover {
+        background-color: #0056b3;
+    }
+
+</style>
+</head>
+<body>
+    <div style="text-align:center;font-family:Cambria,Cochin,Georgia,Times,'Times New Roman', serif;font-size:x-large;margin-bottom:3%;">
+        Registration Form
+    </div>
+    <div class="forms" style="margin-right: 350px;">
+        <form id="registerform" onsubmit="return validateForm()">
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <td>
+                        <input type="text" id="name" name="name"><br>
+                        <span id="nameError" class="error"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Gender</th>
+                    <td>
+                        <input type="radio" name="gender" id="male" value="male">Male
+                        <input type="radio" name="gender" id="female" value="female">Female
+                        <input type="radio" name="gender" id="other" value="other">Other<br>
+                        <span id="genderError" class="error"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Languages known</th>
+                    <td>
+                        <input type="checkbox" name="languages" id="tamil" value="Tamil">Tamil
+                        <input type="checkbox" name="languages" id="english" value="English">English
+                        <input type="checkbox" name="languages" id="hindi" value="Hindi">Hindi<br>
+                        <span id="languagesError" class="error"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Select your district</th>
+                    <td>
+                        <select id="district" name="district" >
+                            <option value="" selected disabled>Select a district</option>
+                            <option value="erode">Erode</option>
+                            <option value="tirupur">Tirupur</option>
+                            <option value="coimbatore">Coimbatore</option>
+                            <option value="cochin">Cochin</option>
+                        </select><br>
+                        <span id="districtError" class="error"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Address</th>
+                    <td>
+                        <textarea name="address" id="address" cols="30" rows="5"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>
+                        <input type="text" id="mail"><br>
+                        <span id="mailError" class="error"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Phone</th>
+                    <td>
+                        <input type="text" id="phone"><br>
+                        <span id="phoneError" class="error"></span>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <th>Set a password</th>
+                    <td>
+                        <input type="password" name="password" id="password"><br>
+                        <span id="passwordError" class="error"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="2"><button type="submit">Register</button></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+
+    <script>
+        function validateForm() {
+            
+            var flag1=true;
+
+            // Get form values
+            var name = document.getElementById("name").value.trim();
+            var email = document.getElementById("mail").value.trim();
+            var phone = document.getElementById("phone").value.trim();
+            var gender = document.querySelector('input[name="gender"]:checked');
+            var languages = document.querySelectorAll('input[name="languages"]:checked');
+            var district = document.getElementById("district").value;
+            var password = document.getElementById("password").value;
+            // Reset error messages
+            nameError=document.getElementById("nameError");
+            mailError=document.getElementById("mailError");
+            phoneError=document.getElementById("phoneError");
+            genderError=document.getElementById("genderError");
+            languagesError=document.getElementById("languagesError");
+            districtError=document.getElementById("districtError");
+            passwordError=document.getElementById("passwordError");
+
+            
+            // Regular expressions for validation
+            var nameRegex = /^[a-zA-Z]+(\s[a-zA-Z]+)*$/;
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            var phoneRegex = /^\d{10}$/;
+            var passwordRegex = /(?=.[A-Z])(?=.\d)(?=.*\W).{8,15}/;
+
+            // Validate Name
+            if (!nameRegex.test(name)) {
+                document.getElementById("nameError").textContent = "Invalid name";
+                flag1=false;
+            }else {
+                nameError.textContent="";
+            }
+
+            // Validate Email
+            if (!emailRegex.test(email)) {
+                document.getElementById("mailError").textContent = "Invalid email";
+                flag1=false;
+            }else{
+                mailError.textContent="";
+            }
+
+            // Validate Phone
+            if (!phoneRegex.test(phone)) {
+                document.getElementById("phoneError").textContent = "Invalid phone number";
+                flag1=false;
+            }else{
+                phoneError.textContent="";
+            }
+            // Validate Gender
+            if (!gender) {
+                document.getElementById("genderError").textContent = "Please select a gender";
+                flag1=false;
+            }else{
+                genderError.textContent="";
+            }
+            // Validate Languages
+            if (languages.length === 0) {
+                document.getElementById("languagesError").textContent = "Please select at least one language";
+                flag1=false;
+            }else{
+                languagesError.textContent="";
+            }
+            // Validate District
+            if (district.length === 0) {
+                document.getElementById("districtError").textContent = "Please select a district";
+                flag1=false;
+            }else{
+                districtError.textContent="";
+            }
+            //password
+            if (!passwordRegex.test(password)) {
+                passwordError.textContent = "Invalid password";
+                flag1=false;
+            }else{
+                passwordError.textContent="";
+            }
+
+
+            if (flag1) {
+                alert("Form submitted successfully!");
+            }
+            // If all validations pass, return true
+            return flag1;
+          
+        }
+        
+    
+    </script>
+</body>
+</html>
